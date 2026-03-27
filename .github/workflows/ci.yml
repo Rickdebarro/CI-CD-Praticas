@@ -5,6 +5,14 @@ on:
     branches: [ "main", "master" ]
 
 jobs:
+  build-job:
+      runs-on: ubuntu-latest
+      steps:
+        - name: Checkout do código
+          uses: actions/checkout@v4
+        - name: Simular Build
+          run: echo "Olá, ${{ github.actor }}! Iniciando build"
+          
   test-job:
     runs-on: ubuntu-latest
     steps:
