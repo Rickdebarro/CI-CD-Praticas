@@ -1,0 +1,32 @@
+name: CI DevOps
+
+on:
+  push:
+    branches: [ "main", "master" ]
+
+jobs:
+  test-job:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Baixar o código do repositório
+        uses: actions/checkout@v4
+
+      - name: Configurar o Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Instalar dependências (Flask e Coverage)
+        run: pip install flask coverage
+
+      - name: Rodar testes com Coverage
+        run: python -m coverage run -m unittest -v tests/appTest.py
+
+      - name: Exibir relatório de cobertura
+        run: python -m coverage report
+
+  test-job2:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Teste 2
+        run: echo "Executando o test-job2 da Ação 1"
